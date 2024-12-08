@@ -1,0 +1,17 @@
+<h1>CREATE NEW USER</h1>
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message|%>\
+     <h3><%= message %> </h3>
+  <%end%>
+<%end%>
+</br>
+<%= form_with model: @user do |form| %>
+  <%= form.label "Username Here:" %>
+  <%= form.text_field :username, :value => "Test" %>
+  <%= form.label :email %>
+  <%= form.email_field :email, placeholder: "email@example.com" %>
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+  <%= form.submit "Create" %>
+<% end %>
+<%= link_to "All Users", users_path %>
