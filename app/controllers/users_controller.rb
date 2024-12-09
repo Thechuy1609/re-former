@@ -8,9 +8,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to new_user_path
+      flash[:success] = "User created successfully!"
+      redirect_to users_path
     else
-      render :new
+      redirect_to new_user_path, alert: @user.errors.full_messages.to_sentence
     end
   end
   def index
@@ -24,9 +25,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:success] = "User updated successfully!"
       redirect_to users_path
     else
-      render :edit
+      redirect_to edit_user_path,  alert: @user.errors.full_messages.to_sentence
     end
   end
 
